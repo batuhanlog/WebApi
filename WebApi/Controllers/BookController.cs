@@ -2,10 +2,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using WebApi.BookOperations.CreateBook;
+using WebApi.BookOperations.DeleteBook;
+using WebApi.BookOperations.GetBookDetail;
 using WebApi.BookOperations.GetBooks;
+using WebApi.BookOperations.UpdateBook;
 using WebApi.DBOperation;
 using static WebApi.BookOperations.CreateBook.CreateBookCommand;
+using static WebApi.BookOperations.UpdateBook.UpdateBookCommand;
 
 
 namespace WebApi.Controllers
@@ -35,10 +40,22 @@ namespace WebApi.Controllers
 
         
         [HttpGet("{id}")]
-        public Book GetById(int id)
+        public IActionResult GetById(int id)
         {
-            var book = _context.Books.FirstOrDefault(x => x.Id == id);
-            return book;
+            BookDetailViewModel result;
+            try
+            {
+             GetBookDetailQuery query = new GetBookDetailQuery(_context);
+                 query.BookId = id;
+                 result = query.Handle();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            return Ok(result);
+
+            
         }
 
         //Post
@@ -62,36 +79,39 @@ namespace WebApi.Controllers
 
         //Put
         [HttpPut("{id}")]
-        public IActionResult UpdateBook(int id, [FromBody] Book updatedBook)
+        public IActionResult UpdateBook(int id, [FromBody] UpdateBookModel updatedBook)
         {
-            var book = _context.Books.SingleOrDefault(x => x.Id == id);
-
-            if (book is null)
+            try
             {
-                return BadRequest( new { message = "Book does not exist" });
+                UpdateBookCommand command = new UpdateBookCommand(_context);
+                command.BookId = id;
+                command.Model = updatedBook;
+                command.Handle();
             }
-
-            book.Title = updatedBook.Title;
-            book.GenreId = updatedBook.GenreId;
-            book.PageCount = updatedBook.PageCount;
-            book.PublishDate = updatedBook.PublishDate;
-
-            _context.SaveChanges();
-            return Ok();
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+                return Ok();
         }
+
+
 
         [HttpDelete("{id}")]
         public IActionResult DeleteBook(int id)
         {
-            var book =_context.Books.SingleOrDefault(x => x.Id == id);
-
-            if (book is null)
+            try
+           {
+                DeleteBookCommand command = new DeleteBookCommand(_context);
+                command.BookId = id;
+                command.Handle();
+            }
+            catch (Exception ex)
             {
-                return BadRequest( new { message = "Book does not exist" });
+                return BadRequest(ex.Message);
             }
 
-            _context.Books.Remove(book);
-            _context.SaveChanges();
+          
             return Ok();
         }
 
