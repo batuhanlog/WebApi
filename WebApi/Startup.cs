@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using WebApi.DBOperation;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
+using WebApi.Middlewares;
 
 public class Startup
 {
@@ -49,6 +50,7 @@ public class Startup
         app.UseHttpsRedirection();
         app.UseRouting();
         app.UseAuthorization();
+        app.UseCustomExceptionMiddleware();
         app.UseEndpoints(endpoints =>
         {
             endpoints.MapControllers();
