@@ -8,6 +8,7 @@ using WebApi.DBOperation;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 using WebApi.Middlewares;
+using WebApi.Services;
 
 public class Startup
 {
@@ -29,6 +30,7 @@ public class Startup
         });
         services.AddDbContext<BookStoreDbContext>(options =>options.UseInMemoryDatabase(databaseName:"DevConnection"));
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
+        services.AddSingleton<ILoggerService, DBLogger>();
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
