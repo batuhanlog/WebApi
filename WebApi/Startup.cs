@@ -6,6 +6,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using WebApi.DBOperation;
 using Microsoft.OpenApi.Models;
+using System.Reflection;
 
 public class Startup
 {
@@ -25,6 +26,8 @@ public class Startup
         {
             c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebApi", Version = "v1" });
         });
+        services.AddDbContext<BookStoreDbContext>(options =>options.UseInMemoryDatabase(databaseName:"DevConnection"));
+        services.AddAutoMapper(Assembly.GetExecutingAssembly());
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
