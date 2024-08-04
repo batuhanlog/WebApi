@@ -3,7 +3,7 @@ using System;
 using System.Linq;
 using WebApi.DBOperation;
 
-namespace WebApi.BookOperations.UpdateBook
+namespace WebApi.Application.BookOperations.Commands.UpdateBook
 {
     public class UpdateBookCommand
     {
@@ -25,13 +25,13 @@ namespace WebApi.BookOperations.UpdateBook
             book.Title = Model.Title != default ? Model.Title : book.Title;
 
             _context.SaveChanges();
-           
+
         }
         public class UpdateBookModel
         {
             public string Title { get; set; }
             public int GenreId { get; set; }
-       
+
         }
     }
 }

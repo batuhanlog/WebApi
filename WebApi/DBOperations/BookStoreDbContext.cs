@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
-using WebApi;
+using WebApi.Entities;
 
 namespace WebApi.DBOperation
 {

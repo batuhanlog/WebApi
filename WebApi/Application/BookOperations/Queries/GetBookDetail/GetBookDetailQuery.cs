@@ -5,14 +5,14 @@ using System.Linq;
 using WebApi.Common;
 using WebApi.DBOperation;
 
-namespace WebApi.BookOperations.GetBookDetail
+namespace WebApi.Application.BookOperations.Queries.GetBookDetail
 {
     public class GetBookDetailQuery
     {
         private readonly BookStoreDbContext _dbContext;
         private readonly IMapper _mapper;
         public int BookId { get; set; }
-        public GetBookDetailQuery(BookStoreDbContext dbcontext,IMapper mapper)
+        public GetBookDetailQuery(BookStoreDbContext dbcontext, IMapper mapper)
         {
             _dbContext = dbcontext;
             _mapper = mapper;
@@ -24,7 +24,7 @@ namespace WebApi.BookOperations.GetBookDetail
                 throw new InvalidOperationException("Book not found");
 
             BookDetailViewModel vm = _mapper.Map<BookDetailViewModel>(book);
-            
+
             return vm;
         }
     }
