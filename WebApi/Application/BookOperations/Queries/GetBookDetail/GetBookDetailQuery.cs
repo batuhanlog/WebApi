@@ -4,16 +4,17 @@ using System;
 using System.Linq;
 using WebApi.Common;
 using WebApi.DBOperation;
+using WebApi.DBOperations;
 
 namespace WebApi.Application.BookOperations.Queries.GetBookDetail
 {
     public class GetBookDetailQuery
     {
         public int GenreId { get; set; }
-        private readonly BookStoreDbContext _dbContext;
+        private readonly IBookStoreDbContext _dbContext;
         private readonly IMapper _mapper;
         public int BookId { get; set; }
-        public GetBookDetailQuery(BookStoreDbContext dbcontext, IMapper mapper)
+        public GetBookDetailQuery(IBookStoreDbContext dbcontext, IMapper mapper)
         {
             _dbContext = dbcontext;
             _mapper = mapper;

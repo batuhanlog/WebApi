@@ -9,6 +9,7 @@ using Microsoft.OpenApi.Models;
 using System.Reflection;
 using WebApi.Middlewares;
 using WebApi.Services;
+using WebApi.DBOperations;
 
 public class Startup
 {
@@ -29,6 +30,7 @@ public class Startup
             c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebApi", Version = "v1" });
         });
         services.AddDbContext<BookStoreDbContext>(options =>options.UseInMemoryDatabase(databaseName:"DevConnection"));
+        services.AddScoped<IBookStoreDbContext>(provider => provider.GetService<BookStoreDbContext>());
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
         services.AddSingleton<ILoggerService, DBLogger>();
     }

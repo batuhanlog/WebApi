@@ -12,6 +12,7 @@ using WebApi.Application.BookOperations.Commands.UpdateBook;
 using WebApi.Application.BookOperations.Queries.GetBookDetail;
 using WebApi.Application.BookOperations.Queries.GetBooks;
 using WebApi.DBOperation;
+using WebApi.DBOperations;
 using static WebApi.Application.BookOperations.Commands.CreateBook.CreateBookCommand;
 using static WebApi.Application.BookOperations.Commands.UpdateBook.UpdateBookCommand;
 
@@ -25,10 +26,10 @@ namespace WebApi.Controllers
     public class BookController : ControllerBase
     {
 
-        private readonly BookStoreDbContext _context;
+        private readonly IBookStoreDbContext _context;
         private readonly IMapper _mapper;
 
-        public BookController(BookStoreDbContext context, IMapper mapper)
+        public BookController(IBookStoreDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
