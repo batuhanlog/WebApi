@@ -6,14 +6,14 @@ using FluentValidation;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using WebApi.Application.BookOperations.CreateBook;
-using WebApi.Application.BookOperations.DeleteBook;
-using WebApi.Application.BookOperations.GetBookDetail;
-using WebApi.Application.BookOperations.GetBooks;
-using WebApi.Application.BookOperations.UpdateBook;
+using WebApi.Application.BookOperations.Commands.CreateBook;
+using WebApi.Application.BookOperations.Commands.DeleteBook;
+using WebApi.Application.BookOperations.Commands.UpdateBook;
+using WebApi.Application.BookOperations.Queries.GetBookDetail;
+using WebApi.Application.BookOperations.Queries.GetBooks;
 using WebApi.DBOperation;
-using static WebApi.Application.BookOperations.CreateBook.CreateBookCommand;
-using static WebApi.Application.BookOperations.UpdateBook.UpdateBookCommand;
+using static WebApi.Application.BookOperations.Commands.CreateBook.CreateBookCommand;
+using static WebApi.Application.BookOperations.Commands.UpdateBook.UpdateBookCommand;
 
 
 namespace WebApi.Controllers
