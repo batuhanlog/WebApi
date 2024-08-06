@@ -8,6 +8,8 @@ namespace WebApi.DBOperations
     {
         DbSet<Book> Books { get; }
         DbSet<Genre> Genres { get; }
+        DbSet<User> Users { get; }
+
         int SaveChanges();
     }
 }
